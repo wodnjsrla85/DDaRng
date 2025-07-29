@@ -1,3 +1,5 @@
+import 'package:app/components/jun/page_header.dart';
+import 'package:app/components/jun/page_tail.dart';
 import 'package:app/components/station_map.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        PageHeader(),
+        PageTail()
+      ],
     return Scaffold(
       body: Column(
         children: [
