@@ -9,14 +9,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox('bycle');
-
+  Hive.registerAdapter(StationAdapter());
   final prefs = await SharedPreferences.getInstance();
   final isFirstRun = prefs.getBool('isFirstRun') ?? true;
 
+  final stationBox = await Hive.openBox<Station>('bycle');
+
   if (isFirstRun) {
-    await loadAndStoreCsvInHive(); // 최초 실행 시에만 데이터 삽입
-    await prefs.setBool('isFirstRun', false); // 다음 실행부턴 실행 안 됨
+    await loadAndStoreCsvInHive(stationBox); // 박스를 전달해서 사용
+    await prefs.setBool('isFirstRun', false);
   }
 
   runApp(const MyApp());
@@ -48,33 +49,32 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-Future<void> loadAndStoreCsvInHive() async {
-  // 1. CSV 파일 읽기
+Future<void> loadAndStoreCsvInHive(Box<Station> stationBox) async {
   final rawData = await rootBundle.loadString('assets/서대문구_대여소_위치정보.csv');
+  List<List<dynamic>> csvTable = const CsvToListConverter(
+    eol: '\n',
+    shouldParseNumbers: false,
+  ).convert(rawData);
 
-  // CSV 파싱
-  List<List<dynamic>> csvData = const CsvToListConverter().convert(rawData);
-
-  // 헤더는 첫 줄이므로 제외
-  final dataRows = csvData.skip(1);
-
-  final stationBox = await Hive.openBox<Station>('stationBox');
+  // List<List<dynamic>> csvData =
+  //     lines.map((line) {
+  //       return const CsvToListConverter().convert(line).first;
+  //     }).toList();
+  final dataRows = csvTable.skip(1);
 
   if (stationBox.isEmpty) {
     for (var row in dataRows) {
-      // 예: [ID, 이름, 위도, 경도]
       final station = Station(
         st_name: row[0].toString(),
         st_adress: row[1].toString(),
         st_lat: double.parse(row[2].toString()),
         st_long: double.parse(row[3].toString()),
       );
+
       await stationBox.add(station);
     }
     print('초기 데이터 저장 완료!');
   } else {
     print('이미 저장된 데이터가 있습니다.');
   }
-
-  await stationBox.close();
 }
