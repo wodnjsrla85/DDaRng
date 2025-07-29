@@ -16,18 +16,14 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         PageHeader(),
-        PageTail()
+        PageTail(),
+
+        SizedBox(
+          height: 450,
+          width: 600,
+          child: StationMap(lat: 37.57675136, lng: 126.9265),
+        ),
       ],
-    return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: 450,
-            width: 600,
-            child: StationMap(lat: 37.57675136, lng: 126.9265),
-          ),
-        ],
-      ),
     );
   }
 }
