@@ -49,13 +49,13 @@ class PageTail extends StatelessWidget {
             style: TextStyle(
               fontSize: ResponsiveValue(
                 context, 
-                defaultValue: 30.0,
+                defaultValue: 25.0,
                 conditionalValues: [
                   Condition.smallerThan(
-                    value: 20.0, name: MOBILE
+                    value: 15.0, name: MOBILE
                   ),
                   Condition.largerThan(
-                    value: 50.0, name: TABLET
+                    value: 40.0, name: TABLET
                   )
                 ]
               ).value,
