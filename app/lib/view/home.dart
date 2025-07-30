@@ -5,6 +5,7 @@ import 'package:app/components/jun/page_top_header.dart';
 import 'package:app/components/station_map.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:web/web.dart' as web;
 
@@ -24,6 +25,7 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.white,
       // ------------------------------------ AppBar ------------------------------------ //
       appBar: AppBar(
+        scrolledUnderElevation: 0.0,
         backgroundColor: Colors.white,
         centerTitle: true,
         // drawer : mobile size
@@ -122,8 +124,8 @@ class _HomeState extends State<Home> {
             PageHeader(),
             // flutter map
             SizedBox(
-              height: 450,
-              width: 600,
+              height: 550,
+              width: 850,
               child: StationMap(lat: 37.57675136, lng: 126.9265, time: time),
             ),
             // page tail

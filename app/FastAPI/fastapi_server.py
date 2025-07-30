@@ -46,6 +46,22 @@ async def station():
         merged.update(d)
     return {'results' : merged}
 
+
+@app.get('/weather')
+async def weather():
+
+    wp = {}
+    response = requests.get('https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/226081?apikey=y7BGIJuqo5A120sJZkgGlW2zElUd0Lr9&metric=true&details=true')
+    if response.status_code == 200:
+        decoded = response.content.decode('utf-8')
+        days = json.loads(decoded)
+        for day in days:
+            wp[day['DateTime'][11:13]]={'기온':day['Temperature']['Value'],'습도':day['RelativeHumidity']}
+    else:
+        print("API 요청 실패:", response.status_code)
+    return {'results' : wp}
+
+
 app.mount("/", StaticFiles(directory="build/web/", html=True), name="flutter_web")
 
 if __name__ == "__main__":

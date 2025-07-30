@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
               ), // 1920 이상은 4K 라는 이름으로 하겠다.
             ],
           ),
-      title: 'Flutter Demo',
+      title: '서릉',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
