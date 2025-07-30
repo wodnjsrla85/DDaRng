@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
           ),
       title: '서릉',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       ),
       home: const Home(),
     );

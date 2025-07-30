@@ -1,14 +1,12 @@
 // -------------------------------------------------------------------------------- //
 import 'package:app/components/jun/page_header.dart';
-import 'package:app/components/jun/page_tail.dart';
 import 'package:app/components/jun/page_top_header.dart';
+import 'package:app/components/jun/select_time.dart';
 import 'package:app/components/station_map.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:web/web.dart' as web;
-
 // -------------------------------------------------------------------------------- //
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,6 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int time = DateTime.now().hour;
+  int _selectedHour = DateTime.now().hour;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,18 +119,29 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
-            // page header
-            PageHeader(),
+            SizedBox(height: 50),
+            SizedBox(
+              width: 200,
+              child: SelectTime(
+                selectedHour: _selectedHour, 
+                onHourChanged: (newHour) {
+                  _selectedHour = newHour;
+                  setState(() {});
+                },
+              ),
+            ),
+            SizedBox(height: 50),
             // flutter map
             SizedBox(
               height: 550,
               width: 850,
               child: StationMap(lat: 37.57675136, lng: 126.9265, time: time),
             ),
-            // page tail
-            SizedBox(height: 100),
-            PageTail(),
-            SizedBox(height: 150),
+            SizedBox(height: 50),
+            // page header
+            PageHeader(),
+
+            SizedBox(height: 50),
           ],
         ),
       ),
