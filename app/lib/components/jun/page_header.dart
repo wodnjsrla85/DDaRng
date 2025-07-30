@@ -1,6 +1,7 @@
 // ----------------------------------------------------------------- //
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+
 // ----------------------------------------------------------------- //
 /*
 // ----------------------------------------------------------------- //
@@ -26,7 +27,7 @@ class PageHeader extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-// 따릉이 이미지
+        // 따릉이 이미지
         Image.asset(
           'images/ddarng_header.jpeg',
           width: MediaQuery.of(context).size.width,
@@ -35,27 +36,24 @@ class PageHeader extends StatelessWidget {
           color: Color.fromRGBO(255, 255, 255, 0.75),
           colorBlendMode: BlendMode.modulate,
         ),
-// Text
+        // Text
         Text(
           '"Predict Leisure"',
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: ResponsiveValue(
-              context, 
-              defaultValue: 40.0,
-              conditionalValues: [
-                Condition.smallerThan(
-                  value: 30.0, name: MOBILE
-                ),
-                Condition.largerThan(
-                  value: 50.0, name: TABLET
-                )
-              ]
-            ).value,
+            fontSize:
+                ResponsiveValue(
+                  context,
+                  defaultValue: 40.0,
+                  conditionalValues: [
+                    Condition.smallerThan(value: 30.0, name: MOBILE),
+                    Condition.largerThan(value: 50.0, name: TABLET),
+                  ],
+                ).value,
             color: const Color.fromARGB(255, 47, 47, 47),
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
           ),
-        )
+        ),
       ],
     );
   }

@@ -3,6 +3,7 @@ import 'package:app/view/home.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -40,17 +41,22 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-// Responsive Breakpoints 설정 (가로 기준)
-      builder: (context, child) => ResponsiveBreakpoints.builder(
-        child: child!, 
-        breakpoints: [
-          Breakpoint(start: 0, end: 450, name: MOBILE),
-          Breakpoint(start: 451, end: 800, name: TABLET),
-          Breakpoint(start: 801, end: 1920, name: DESKTOP),
-          Breakpoint(start: 1921, end: double.infinity, name: '4K'), // 1920 이상은 4K 라는 이름으로 하겠다.
-        ]
-      ),
+    return GetMaterialApp(
+      // Responsive Breakpoints 설정 (가로 기준)
+      builder:
+          (context, child) => ResponsiveBreakpoints.builder(
+            child: child!,
+            breakpoints: [
+              Breakpoint(start: 0, end: 450, name: MOBILE),
+              Breakpoint(start: 451, end: 800, name: TABLET),
+              Breakpoint(start: 801, end: 1920, name: DESKTOP),
+              Breakpoint(
+                start: 1921,
+                end: double.infinity,
+                name: '4K',
+              ), // 1920 이상은 4K 라는 이름으로 하겠다.
+            ],
+          ),
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

@@ -11,21 +11,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int time = DateTime.now().hour;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        PageHeader(),
-        PageTail(),
-
-        SizedBox(
-          height: 450,
-          width: 600,
-          child: StationMap(lat: 37.57675136, lng: 126.9265),
-        ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          PageHeader(),
+          SizedBox(
+            height: 450,
+            width: 600,
+            child: StationMap(lat: 37.57675136, lng: 126.9265, time: time),
+          ),
+          SizedBox(height: 30),
+          SizedBox(width: 600, height: 150, child: PageTail()),
+          SizedBox(height: 30),
+        ],
+      ),
     );
   }
 }
-
-// http://openapi.seoul.go.kr:8088/(인증키)/json/bikeList/1/5/

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:web/web.dart' as web;
+
 // ----------------------------------------------------------------- //
 /*
 // ----------------------------------------------------------------- //
@@ -21,19 +22,19 @@ import 'package:web/web.dart' as web;
 */
 class PageTail extends StatelessWidget {
   const PageTail({super.key});
-// ----------------------------------------------------------------- //
+  // ----------------------------------------------------------------- //
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-// 따릉이 홈페이지 이동
+      // 따릉이 홈페이지 이동
       onTap: () {
-          final win = web.window;
-          win.open('https://www.bikeseoul.com/', '_blank');
+        final win = web.window;
+        win.open('https://www.bikeseoul.com/', '_blank');
       },
       child: Stack(
         alignment: Alignment.center,
         children: [
-// 따릉이 이미지
+          // 따릉이 이미지
           Image.asset(
             'images/ddarng_home_page.png',
             width: MediaQuery.of(context).size.width,
@@ -42,25 +43,22 @@ class PageTail extends StatelessWidget {
             color: Color.fromRGBO(255, 255, 255, 0.7),
             colorBlendMode: BlendMode.modulate,
           ),
-// Text
+          // Text
           Text(
             'Go To Page',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: ResponsiveValue(
-                context, 
-                defaultValue: 30.0,
-                conditionalValues: [
-                  Condition.smallerThan(
-                    value: 20.0, name: MOBILE
-                  ),
-                  Condition.largerThan(
-                    value: 50.0, name: TABLET
-                  )
-                ]
-              ).value,
+              fontSize:
+                  ResponsiveValue(
+                    context,
+                    defaultValue: 30.0,
+                    conditionalValues: [
+                      Condition.smallerThan(value: 20.0, name: MOBILE),
+                      Condition.largerThan(value: 50.0, name: TABLET),
+                    ],
+                  ).value,
               color: Colors.black,
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],
