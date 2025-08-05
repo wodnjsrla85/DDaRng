@@ -12,11 +12,14 @@ class Station {
   double st_lat;
   @HiveField(3)
   double st_long;
+  @HiveField(4)
+  double st_alt;
 
   Station({
     required this.st_name,
     required this.st_adress,
     required this.st_lat,
     required this.st_long,
+    required this.st_alt,
   });
 }

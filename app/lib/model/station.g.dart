@@ -21,13 +21,14 @@ class StationAdapter extends TypeAdapter<Station> {
       st_adress: fields[1] as String,
       st_lat: fields[2] as double,
       st_long: fields[3] as double,
+      st_alt: fields[4] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, Station obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.st_name)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class StationAdapter extends TypeAdapter<Station> {
       ..writeByte(2)
       ..write(obj.st_lat)
       ..writeByte(3)
-      ..write(obj.st_long);
+      ..write(obj.st_long)
+      ..writeByte(4)
+      ..write(obj.st_alt);
   }
 
   @override

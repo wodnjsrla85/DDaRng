@@ -62,12 +62,13 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
       ),
       home: const Home(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
 Future<void> loadAndStoreCsvInHive(Box<Station> stationBox) async {
-  final rawData = await rootBundle.loadString('assets/서대문구_대여소_위치정보.csv');
+  final rawData = await rootBundle.loadString('assets/서대문구_대여소_정보.csv');
   List<List<dynamic>> csvTable = const CsvToListConverter(
     eol: '\n',
     shouldParseNumbers: false,
@@ -86,6 +87,7 @@ Future<void> loadAndStoreCsvInHive(Box<Station> stationBox) async {
         st_adress: row[1].toString(),
         st_lat: double.parse(row[2].toString()),
         st_long: double.parse(row[3].toString()),
+        st_alt: double.parse(row[4].toString()),
       );
 
       await stationBox.add(station);
